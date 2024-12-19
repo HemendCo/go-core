@@ -3,9 +3,11 @@ package core
 import (
 	"context"
 	"fmt"
+	"log"
+	"sync"
+
 	"github.com/HemendCo/go-core/helpers"
 	"github.com/HemendCo/go-core/plugins"
-	"sync"
 )
 
 type Keywords string
@@ -65,30 +67,9 @@ var onceApp sync.Once
 func defaultOptions() []Option {
 	var defaultOpts []Option
 
-	rootPath, err := helpers.ProjectPath()
-	if err == nil {
-		defaultOpts = append(defaultOpts, RootPath(rootPath))
-	}
+	defaultOpts = append(defaultOpts, RootPath(*helpers.ProjectPath()))
 
 	return defaultOpts
-}
-
-// Function to get the app instance (similar to app() in Laravel)
-func CreateApp(opts ...Option) *App {
-	onceApp.Do(func() {
-		opts = append(defaultOptions(), opts...)
-		opt, err := composeOptions(opts...)
-		if err != nil {
-			// options is not valid
-			return
-		}
-
-		appInstance = &App{
-			opt:       opt,
-			singleton: *NewSingleton(),
-		}
-	})
-	return appInstance
 }
 
 func composeOptions(opts ...Option) (option, error) {
@@ -109,6 +90,24 @@ func composeOptions(opts ...Option) (option, error) {
 		}
 	}
 	return res, nil
+}
+
+// Function to get the app instance (similar to app() in Laravel)
+func CreateApp(opts ...Option) *App {
+	onceApp.Do(func() {
+		opts = append(defaultOptions(), opts...)
+		opt, err := composeOptions(opts...)
+		if err != nil {
+			// options is not valid
+			log.Fatalf("Error composing options: %v", err)
+		}
+
+		appInstance = &App{
+			opt:       opt,
+			singleton: *NewSingleton(),
+		}
+	})
+	return appInstance
 }
 
 func (a *App) GetContext() *context.Context {

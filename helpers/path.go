@@ -1,32 +1,34 @@
 package helpers
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 )
 
 // JoinWithProjectPath combines the input path with the project directory
-func ProjectPath() (string, error) {
+func ProjectPath() *string {
 	// Get the current working directory (project directory)
 	projectDir, err := os.Getwd()
 	if err != nil {
-		return "", err
+		fmt.Printf("Error getting project path: %v\n", err)
+		return nil
 	}
 
 	// Construct the full path by joining the project directory and the relative path
-	return projectDir, nil
+	return &projectDir
 }
 
 // JoinWithProjectPath combines the input path with the project directory
 func JoinWithProjectPath(relativePath ...string) string {
-	// Get the current working directory (project directory)
-	projectDir, err := ProjectPath()
-	if err != nil {
-		return ""
+	// Ensure that the relativePath is not empty
+	if len(relativePath) == 0 {
+		fmt.Println("Warning: The input path is empty.")
+		return *ProjectPath() // return just the project path if no relative path is provided
 	}
 
 	// Construct the full path by joining the project directory and the relative paths
-	fullPath := filepath.Join(projectDir, filepath.Join(relativePath...))
+	fullPath := filepath.Join(*ProjectPath(), filepath.Join(relativePath...))
 
 	// Construct the full path by joining the project directory and the relative path
 	return fullPath

@@ -5,14 +5,6 @@ import (
 	"fmt"
 )
 
-// GetValue returns the default value if the provided value is empty or nil.
-func GetValue(value, defaultValue interface{}) interface{} {
-	if value == nil || value == "" {
-		return defaultValue
-	}
-	return value
-}
-
 func CastValue[T any](value interface{}) T {
 	var result T
 	if v, ok := value.(T); ok {
