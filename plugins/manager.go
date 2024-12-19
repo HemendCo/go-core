@@ -16,13 +16,13 @@ func NewPluginManager() *PluginManager {
 }
 
 func (pm *PluginManager) LoadPlugin(path string, config interface{}) error {
-	// بارگذاری پلاگین از مسیر مشخص شده
+	// Load the plugin from the specified path.
 	p, err := plugin.Open(path)
 	if err != nil {
 		return fmt.Errorf("could not open plugin: %v", err)
 	}
 
-	// فرض می‌کنیم که پلاگین دارای یک تابع به نام "NewPlugin" است
+	// Assume the plugin provides a function named "NewPlugin".
 	symbol, err := p.Lookup("NewPlugin")
 	if err != nil {
 		return fmt.Errorf("could not find NewPlugin function: %v", err)
@@ -33,28 +33,28 @@ func (pm *PluginManager) LoadPlugin(path string, config interface{}) error {
 		return fmt.Errorf("invalid plugin type")
 	}
 
-	// ایجاد یک نمونه از پلاگین
+	// Create an instance of the plugin.
 	pluginInstance := newPluginFunc()
 
-	// بررسی اینکه آیا پلاگین قبلاً بارگذاری شده است
+	// Check if the plugin is already loaded.
 	if pm.HasPlugin(pluginInstance.Name()) {
 		return fmt.Errorf("plugin %s already exists", pluginInstance.Name())
 	}
 
-	// ذخیره پلاگین در نقشه
+	// Store the plugin in the map.
 	pm.plugins[pluginInstance.Name()] = pluginInstance
 
-	// فراخوانی متد Init پلاگین
+	// Call the Init method of the plugin.
 	return pluginInstance.Init(config)
 }
 
-// متد برای بررسی اینکه آیا پلاگین بارگذاری شده است
+// Method to check if a plugin is already loaded.
 func (pm *PluginManager) HasPlugin(name string) bool {
 	_, exists := pm.plugins[name]
 	return exists
 }
 
-// متد برای اجرای یک پلاگین خاص
+// Method to execute a specific plugin.
 func (pm *PluginManager) ExecutePlugin(name string, input interface{}) (interface{}, error) {
 	if plugin, exists := pm.plugins[name]; exists {
 		return plugin.Execute(input)

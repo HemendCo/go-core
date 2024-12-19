@@ -3,29 +3,31 @@ package cache_drivers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/HemendCo/go-core/cache/cache_models"
 	"sync"
 	"time"
+
+	"github.com/HemendCo/go-core/cache/cache_models"
 )
 
-// mapCacheItem نگهدارنده داده‌های کش با زمان انقضاء
+// mapCacheItem holds cached data along with its expiration time.
 type mapCacheItem struct {
 	value      interface{}
 	expiration time.Time
 }
 
-// MapCacheDriver ساختار برای نگهداری کش در حافظه
+// MapCacheDriver is a structure for in-memory caching.
 type MapCacheDriver struct {
 	cache map[string]mapCacheItem
 	cfg   *cache_models.MapCacheConfig
 	mu    sync.RWMutex
 }
 
-// Name implements cache.CacheDriver.
+// Name returns the name of the cache driver.
 func (r *MapCacheDriver) Name() string {
 	return "map"
 }
 
+// Init initializes the cache with the provided configuration.
 func (r *MapCacheDriver) Init(config interface{}) error {
 	if r.cache != nil {
 		return nil
@@ -43,12 +45,12 @@ func (r *MapCacheDriver) Init(config interface{}) error {
 	return nil
 }
 
-// Set ذخیره داده‌ها در Redis
+// Set stores data in the cache with an expiration time.
 func (r *MapCacheDriver) Set(key string, value interface{}, expiration time.Duration) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	// اگر گزینه serialize فعال باشد، مقدار سریالایز می‌شود
+	// Serialize the value if serialization is enabled.
 	if r.cfg.Serialize {
 		serializedValue, err := json.Marshal(value)
 		if err != nil {
@@ -57,7 +59,7 @@ func (r *MapCacheDriver) Set(key string, value interface{}, expiration time.Dura
 		value = serializedValue
 	}
 
-	// تنظیم زمان انقضاء
+	// Set expiration time.
 	exp := time.Now().Add(expiration)
 	r.cache[key] = mapCacheItem{
 		value:      value,
@@ -67,23 +69,23 @@ func (r *MapCacheDriver) Set(key string, value interface{}, expiration time.Dura
 	return nil
 }
 
-// Get بازیابی داده‌ها از Redis
+// Get retrieves data from the cache by key.
 func (r *MapCacheDriver) Get(key string) (interface{}, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
 	item, found := r.cache[key]
 	if !found {
-		return nil, nil // key does not exist
+		return nil, nil // Key does not exist.
 	}
 
-	// اگر زمان انقضا گذشته باشد، مقدار حذف می‌شود
+	// Remove and return error if the key has expired.
 	if time.Now().After(item.expiration) {
 		delete(r.cache, key)
 		return nil, errors.New("key expired")
 	}
 
-	// اگر گزینه serialize فعال باشد، مقدار Deserialize می‌شود
+	// Deserialize the value if serialization is enabled.
 	if r.cfg.Serialize {
 		var deserializedValue interface{}
 		err := json.Unmarshal(item.value.([]byte), &deserializedValue)
@@ -96,6 +98,7 @@ func (r *MapCacheDriver) Get(key string) (interface{}, error) {
 	return item.value, nil
 }
 
+// Has checks if a key exists in the cache and has not expired.
 func (r *MapCacheDriver) Has(key string) (bool, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -105,7 +108,7 @@ func (r *MapCacheDriver) Has(key string) (bool, error) {
 		return false, nil
 	}
 
-	// اگر زمان انقضاء گذشته باشد، کلید حذف می‌شود و false برمی‌گرداند
+	// Remove expired key and return false.
 	if time.Now().After(item.expiration) {
 		delete(r.cache, key)
 		return false, nil
@@ -114,7 +117,7 @@ func (r *MapCacheDriver) Has(key string) (bool, error) {
 	return true, nil
 }
 
-// Delete حذف داده‌ها از Redis
+// Delete removes data from the cache by key.
 func (r *MapCacheDriver) Delete(key string) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()

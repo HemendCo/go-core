@@ -2,6 +2,7 @@ package sms
 
 import (
 	"fmt"
+
 	"github.com/HemendCo/go-core"
 	"github.com/HemendCo/go-core/sms/sms_drivers"
 )
@@ -30,7 +31,7 @@ func (sm *SMSManager) RegisterDriver(driver SMSDriver) {
 func (sm *SMSManager) CreateSMSFactory(driverName string, config interface{}) (SMSDriver, error) {
 	driver, exists := sm.drivers[driverName]
 	if !exists {
-		return nil, fmt.Errorf("unsupported logger driver %s", driverName)
+		return nil, fmt.Errorf("unsupported sms driver %s", driverName)
 	}
 
 	if err := driver.Init(sm.app, config); err != nil {
