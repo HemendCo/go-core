@@ -1,10 +1,10 @@
 package core
 
 import (
-	"HemendCo/go-core/helpers"
-	"HemendCo/go-core/plugins"
 	"context"
 	"fmt"
+	"github.com/HemendCo/go-core/helpers"
+	"github.com/HemendCo/go-core/plugins"
 	"sync"
 )
 

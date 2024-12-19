@@ -1,9 +1,9 @@
 package database
 
 import (
-	"HemendCo/go-core/database/db_interfaces"
 	"database/sql"
 	"fmt"
+	"github.com/HemendCo/go-core/database/db_interfaces"
 	"log"
 	"os"
 	"path/filepath"

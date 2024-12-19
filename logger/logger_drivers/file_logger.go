@@ -1,10 +1,10 @@
 package logger_drivers
 
 import (
-	"HemendCo/go-core/filemanager"
-	"HemendCo/go-core/logger/logger_models"
 	"errors"
 	"fmt"
+	"github.com/HemendCo/go-core/filemanager"
+	"github.com/HemendCo/go-core/logger/logger_models"
 	"time"
 )
 

@@ -1,8 +1,8 @@
 package cache
 
 import (
-	"HemendCo/go-core/cache/cache_drivers"
 	"fmt"
+	"github.com/HemendCo/go-core/cache/cache_drivers"
 )
 
 type CacheManager struct {

@@ -1,10 +1,10 @@
 package db_drivers
 
 import (
-	"HemendCo/go-core/database/db_config"
-	"HemendCo/go-core/database/db_interfaces"
 	"database/sql"
 	"fmt"
+	"github.com/HemendCo/go-core/database/db_config"
+	"github.com/HemendCo/go-core/database/db_interfaces"
 
 	"github.com/golang-migrate/migrate/v4/database"
 	migrateSqlite "github.com/golang-migrate/migrate/v4/database/sqlite"

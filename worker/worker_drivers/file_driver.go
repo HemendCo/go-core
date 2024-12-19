@@ -1,13 +1,13 @@
 package worker_drivers
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/filemanager"
-	"HemendCo/go-core/helpers"
-	"HemendCo/go-core/worker/worker_interfaces"
-	"HemendCo/go-core/worker/worker_models"
 	"encoding/json"
 	"fmt"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/filemanager"
+	"github.com/HemendCo/go-core/helpers"
+	"github.com/HemendCo/go-core/worker/worker_interfaces"
+	"github.com/HemendCo/go-core/worker/worker_models"
 	"log"
 	"os"
 	"path/filepath"

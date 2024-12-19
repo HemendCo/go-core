@@ -1,9 +1,9 @@
 package sms
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/sms/sms_drivers"
 	"fmt"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/sms/sms_drivers"
 )
 
 type SMSManager struct {

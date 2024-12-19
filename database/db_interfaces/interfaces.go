@@ -1,7 +1,7 @@
 package db_interfaces
 
 import (
-	"HemendCo/go-core/database/db_config"
+	"github.com/HemendCo/go-core/database/db_config"
 
 	"database/sql"
 

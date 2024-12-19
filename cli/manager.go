@@ -1,9 +1,9 @@
 package cli
 
 import (
-	"HemendCo/go-core/cli/cli_drivers"
-	"HemendCo/go-core/cli/cli_models"
 	"fmt"
+	"github.com/HemendCo/go-core/cli/cli_drivers"
+	"github.com/HemendCo/go-core/cli/cli_models"
 )
 
 type CLIManager struct {

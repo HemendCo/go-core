@@ -1,10 +1,10 @@
 package database
 
 import (
-	"HemendCo/go-core/database/db_config"
-	"HemendCo/go-core/database/db_drivers"
-	"HemendCo/go-core/database/db_interfaces"
 	"fmt"
+	"github.com/HemendCo/go-core/database/db_config"
+	"github.com/HemendCo/go-core/database/db_drivers"
+	"github.com/HemendCo/go-core/database/db_interfaces"
 )
 
 type DatabaseManager struct {

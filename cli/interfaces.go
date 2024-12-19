@@ -1,6 +1,6 @@
 package cli
 
-import "HemendCo/go-core/cli/cli_models"
+import "github.com/HemendCo/go-core/cli/cli_models"
 
 type CLIDriver interface {
 	Name() string

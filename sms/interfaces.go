@@ -1,8 +1,8 @@
 package sms
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/sms/sms_models"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/sms/sms_models"
 	"time"
 )
 

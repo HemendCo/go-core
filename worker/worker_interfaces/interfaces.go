@@ -1,7 +1,7 @@
 package worker_interfaces
 
 import (
-	"HemendCo/go-core"
+	"github.com/HemendCo/go-core"
 )
 
 // Task defines the methods that all tasks should implement.

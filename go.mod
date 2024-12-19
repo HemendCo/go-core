@@ -1,4 +1,4 @@
-module HemendCo/go-core
+module github.com/HemendCo/go-core
 
 go 1.23.1
 

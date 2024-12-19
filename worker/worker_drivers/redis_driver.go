@@ -1,12 +1,12 @@
 package worker_drivers
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/worker/worker_interfaces"
-	"HemendCo/go-core/worker/worker_models"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/worker/worker_interfaces"
+	"github.com/HemendCo/go-core/worker/worker_models"
 
 	"github.com/hibiken/asynq"
 )

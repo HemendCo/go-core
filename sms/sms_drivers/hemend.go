@@ -1,13 +1,13 @@
 package sms_drivers
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/cache"
-	"HemendCo/go-core/sms/sms_models"
 	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/cache"
+	"github.com/HemendCo/go-core/sms/sms_models"
 	"io"
 	"net/http"
 	"time"

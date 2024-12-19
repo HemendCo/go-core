@@ -1,12 +1,12 @@
 package cache_drivers
 
 import (
-	"HemendCo/go-core/cache/cache_models"
-	"HemendCo/go-core/filemanager"
-	"HemendCo/go-core/helpers"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/HemendCo/go-core/cache/cache_models"
+	"github.com/HemendCo/go-core/filemanager"
+	"github.com/HemendCo/go-core/helpers"
 	"os"
 	"path/filepath"
 	"sync"

@@ -1,7 +1,7 @@
 package cli_drivers
 
 import (
-	"HemendCo/go-core/cli/cli_models"
+	"github.com/HemendCo/go-core/cli/cli_models"
 
 	"github.com/spf13/cobra"
 )

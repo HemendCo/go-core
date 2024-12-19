@@ -1,8 +1,8 @@
 package interfaces
 
 import (
-	"HemendCo/go-core"
 	"context"
+	"github.com/HemendCo/go-core"
 )
 
 // AppInterface defines the methods for the App structure.

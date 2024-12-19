@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"HemendCo/go-core/logger/logger_drivers"
 	"fmt"
+	"github.com/HemendCo/go-core/logger/logger_drivers"
 )
 
 type LoggerManager struct {

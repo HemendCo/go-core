@@ -1,10 +1,10 @@
 package worker
 
 import (
-	"HemendCo/go-core"
-	"HemendCo/go-core/worker/worker_drivers"
-	"HemendCo/go-core/worker/worker_interfaces"
 	"fmt"
+	"github.com/HemendCo/go-core"
+	"github.com/HemendCo/go-core/worker/worker_drivers"
+	"github.com/HemendCo/go-core/worker/worker_interfaces"
 )
 
 type WorkerManager struct {

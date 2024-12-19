@@ -1,9 +1,9 @@
 package database
 
 import (
-	"HemendCo/go-core/database/db_config"
-	"HemendCo/go-core/database/db_interfaces"
 	"database/sql"
+	"github.com/HemendCo/go-core/database/db_config"
+	"github.com/HemendCo/go-core/database/db_interfaces"
 
 	MigrateDB "github.com/golang-migrate/migrate/v4/database"
 	"gorm.io/gorm"
